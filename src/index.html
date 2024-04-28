@@ -58,25 +58,24 @@
     </div>
   </div>
 
-  <script>
+  <script>  // Utilizado para incorporar JavaScript diretamente no documento HTML
+  
+           // Comando para  exibir o modal de confirmação
     document.getElementById('botao-calcular').addEventListener('click', function() {
-      // Exibir o modal de confirmação
       document.getElementById('modal').style.display = 'block';
     });
-
+          //  Comando para fechar o modal - btn- sim
     document.getElementById('btn-sim').addEventListener('click', function() {
-      // Fechar o modal de confirmação
       document.getElementById('modal').style.display = 'none';
 
-      // Calcular os resultados com desconto
+      // Comando para calcular os resultados com desconto 
       calcularResultados(true);
     });
-
+                //  btn-nao //
     document.getElementById('btn-nao').addEventListener('click', function() {
-      // Fechar o modal de confirmação
       document.getElementById('modal').style.display = 'none';
 
-      // Calcular os resultados sem desconto
+      // Comando para calcular os resultados sem desconto
       calcularResultados(false);
     });
 
@@ -87,32 +86,32 @@
 
       let desconto = 0;
       if (aplicarDesconto && (metodoPagamento === "Pix" || metodoPagamento === "Dinheiro" || metodoPagamento === "Cartão de Débito")) {
-          desconto = valorTotal * 0.1; // 10% de desconto
+          desconto = valorTotal * 0.1; 
       }
 
       let totalComDesconto = valorTotal - desconto;
       let valorPorPessoa = totalComDesconto / numeroPessoas;
 
-      // Preencher os resultados diretamente no HTML do modal
+      // Comando para preencher os resultados diretamente no HTML do modal
       document.getElementById('info-total').textContent = "Valor Total: R$ " + valorTotal.toFixed(2);
       document.getElementById('info-desconto').textContent = "Desconto: R$ " + desconto.toFixed(2);
       document.getElementById('info-valor-por-pessoa').textContent = "Valor por Pessoa: R$ " + valorPorPessoa.toFixed(2);
 
-      // Exibir o modal com os resultados
+      // Comando para exibir o modal com os resultados
       document.getElementById('modal-resultados').style.display = 'block';
     }
 
-    // Fechar o modal de confirmação quando o botão "Fechar" é clicado
+    // Comando para  fechar o modal no "x " e "Concluir"
     document.getElementById('fechar-modal').addEventListener('click', function() {
       document.getElementById('modal').style.display = 'none';
     });
 
-    // Fechar o modal de resultados quando o botão "Fechar" é clicado
+    
     document.getElementById('fechar-modal-resultados').addEventListener('click', function() {
       document.getElementById('modal-resultados').style.display = 'none';
     });
 
-    // Fechar o modal de resultados quando o botão "CONCLUIR" é clicado
+    
     document.getElementById('btn-concluir').addEventListener('click', function() {
       document.getElementById('modal-resultados').style.display = 'none';
      
