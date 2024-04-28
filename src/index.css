@@ -65,7 +65,7 @@ body{ background-color: rgb(223, 223, 223);
   font-size: 16px;
   
 }
-  /* CSS para a config do pré modal */
+  /* CSS do pré modal */
   .modal {
     display: none;
     position: fixed;
@@ -147,7 +147,7 @@ h4{
 }
 
 
-/* Estilos para que os botões do modal fiquem lado a lado */
+/* Estilização dos botões */
 .modal-btn-sim,
 .modal-btn-nao {
   font-family: "Bebas Neue", sans-serif; 
@@ -176,21 +176,23 @@ h4{
   
 }
 
-/* Efeito hover para o botão "Não" */
+/* Estilização das cores do botões*/
+
 .modal-btn-nao {
   background-color: white; 
   color: black;
+ 
   
 }
-/* Efeito hover para o botão "Sim" */
+
 .modal-btn-sim {
   background-color:rgb(0, 107, 139); 
   color: white;
   
 }
 
-/* Efeito hover para o botão "Concluir" */
-.modal-btn-concluir{
+
+.modal-btn-concluir {
   background-color:rgb(0, 107, 139); 
   color: white;
 
