@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento de Conta</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="modal.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300..700&display=swap');
+  </style>
+</head>
+<body>
+  <img src="Logo Patroni.jpg" alt="Logo da Patroni" height="250" width="250">
+
+  <div class="container">
+    <label for="numero-pessoas">Informe o nº de pessoas na mesa:</label>
+    <input type="number" id="numero-pessoas" placeholder="nº pessoas">
+    <p>
+    <label for="valor-mesa">Informe o valor total da conta:</label>
+    <input type="number" id="valor-mesa" placeholder="R$">
+    <p>
+    <label for="metodo-pagamento">Forma de Pagamento:</label>
+    <select id="metodo-pagamento">
+      <option value="Pix">Pix</option>
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Cartão de Débito">Cartão de Débito</option>
+      <option value="Cartão de Crédito">Cartão de Crédito</option>
+    </select>
+    <p>
+
+    <button id="botao-calcular">CALCULAR</button>
+
+    <!-- Modal de confirmação -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="fechar-modal">&times;</span>
+        <h2>Esse pagamento terá desconto?</h2>
+        <h4>Apenas para contas pagas em pix, dinheiro ou débito.</h4>
+        <button id="btn-sim" class="modal-btn-sim">Sim</button>
+        <button id="btn-nao" class="modal-btn-nao">Não</button>
+      </div>
+    </div>
+
+    <!-- Modal de resultados -->
+    <div id="modal-resultados" class="modal">
+      <div class="modal-content">
+        <span id="fechar-modal-resultados">&times;</span>
+        <h2>Informações da Conta</h2>
+        <div class="container">
+          <h4 id="info-total"></h4>
+          <h4 id="info-desconto"></h4>
+          <h4 id="info-valor-por-pessoa"></h4>
+          <button id="btn-concluir" class="modal-btn-concluir">CONCLUIR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('botao-calcular').addEventListener('click', function() {
+      // Exibir o modal de confirmação
+      document.getElementById('modal').style.display = 'block';
+    });
+
+    document.getElementById('btn-sim').addEventListener('click', function() {
+      // Fechar o modal de confirmação
+      document.getElementById('modal').style.display = 'none';
+
+      // Calcular os resultados com desconto
+      calcularResultados(true);
+    });
+
+    document.getElementById('btn-nao').addEventListener('click', function() {
+      // Fechar o modal de confirmação
+      document.getElementById('modal').style.display = 'none';
+
+      // Calcular os resultados sem desconto
+      calcularResultados(false);
+    });
+
+    function calcularResultados(aplicarDesconto) {
+      let valorTotal = parseFloat(document.getElementById('valor-mesa').value);
+      let numeroPessoas = parseInt(document.getElementById('numero-pessoas').value);
+      let metodoPagamento = document.getElementById('metodo-pagamento').value;
+
+      let desconto = 0;
+      if (aplicarDesconto && (metodoPagamento === "Pix" || metodoPagamento === "Dinheiro" || metodoPagamento === "Cartão de Débito")) {
+          desconto = valorTotal * 0.1; // 10% de desconto
+      }
+
+      let totalComDesconto = valorTotal - desconto;
+      let valorPorPessoa = totalComDesconto / numeroPessoas;
+
+      // Preencher os resultados diretamente no HTML do modal
+      document.getElementById('info-total').textContent = "Valor Total: R$ " + valorTotal.toFixed(2);
+      document.getElementById('info-desconto').textContent = "Desconto: R$ " + desconto.toFixed(2);
+      document.getElementById('info-valor-por-pessoa').textContent = "Valor por Pessoa: R$ " + valorPorPessoa.toFixed(2);
+
+      // Exibir o modal com os resultados
+      document.getElementById('modal-resultados').style.display = 'block';
+    }
+
+    // Fechar o modal de confirmação quando o botão "Fechar" é clicado
+    document.getElementById('fechar-modal').addEventListener('click', function() {
+      document.getElementById('modal').style.display = 'none';
+    });
+
+    // Fechar o modal de resultados quando o botão "Fechar" é clicado
+    document.getElementById('fechar-modal-resultados').addEventListener('click', function() {
+      document.getElementById('modal-resultados').style.display = 'none';
+    });
+
+    // Fechar o modal de resultados quando o botão "CONCLUIR" é clicado
+    document.getElementById('btn-concluir').addEventListener('click', function() {
+      document.getElementById('modal-resultados').style.display = 'none';
+     
+
+    });
+  </script>
+</body>
+</html>
